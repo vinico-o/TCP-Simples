@@ -21,10 +21,11 @@ while True:
     #accept() então, retorna um novo socket e o endereço do cliente
     #uma conexão TCP é criada entre socketCliente e socketConexao
     socketConexao, endereco = socketServidor.accept()
-    print("Conectado por:", endereco)
+    print(f"Conectado com: {endereco}\n")
     
     while True:
-        mensagem = socketConexao.recv(2048).decode()
+        mensagem = socketConexao.recv(2048).decode("utf-8")
+        print("Mensagem Recebida!")
         
         if mensagem.upper() == "FIM":
             print("Servidor encerrado!\n")
@@ -34,4 +35,4 @@ while True:
             break
         else:
             mensagemMaiuscula = mensagem.upper()
-            socketConexao.send(mensagemMaiuscula.encode())
+            socketConexao.send(mensagemMaiuscula.encode("utf-8"))
